@@ -70,6 +70,11 @@ aha -f "$TMP_DIR/$FOLDER_NAME.tree" | \
     sed "/<pre>/,/<\/pre>/ s/@<span style=\"font-weight:bold;color:#23A3DD;\">📁/@<span style=\"font-weight:bold;color:#23A3DD;\">$ROOT_ICON<\/i>/g" \
     > "$TMP_DIR/$FOLDER_NAME.html"
 
+if [[ $INTERACTIVE == 'true' ]]; then
+  vipe < "$TMP_DIR/$FOLDER_NAME.html" > "$TMP_DIR/$FOLDER_NAME.html.tmp"
+  mv "$TMP_DIR/$FOLDER_NAME.html.tmp" "$TMP_DIR/$FOLDER_NAME.html"
+fi 
+
 # Convert to SVG and output to stdout
 docker run --rm -v"$TMP_DIR":/in fathyb/html2svg:1.0.0 "file:///in/$FOLDER_NAME.html" |\
   sed '/<rect fill="white".*/d' |\
