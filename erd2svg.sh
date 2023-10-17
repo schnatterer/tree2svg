@@ -5,6 +5,7 @@ FOLDER_NAME="$(basename "$FULL_PATH")"
 LINE_COLOR="${LINE_COLOR:-'#777'}" # black or #777 in bright mode, white for dark mode
 ADDITIONAL_ARGS="${ADDITIONAL_ARGS:-}" 
 INTERACTIVE=${INTERACTIVE:-'false'}
+ROOT_ICON=${ROOT_ICON:-'📂'} # former default: '<i class="fab fa-git-alt fa-lg">'
 
 TMP_DIR=$(mktemp -d)
 deleteTmpDir() {
@@ -66,7 +67,7 @@ aha -f "$TMP_DIR/$FOLDER_NAME.tree" | \
     sed 's/<head>/<head><style type="text\/css">img.emoji { height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;}<\/style>\n/g' | \
     sed 's/<\/body>/<script src="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/5.15.4\/js\/all.min.js"><\/script>\n<\/body>/g' | \
     sed 's/<head>/<head><link rel="stylesheet" href="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/5.15.4\/css\/all.min.css"\/>\n/g' | \
-    sed '/<pre>/,/<\/pre>/ s/@<span style="font-weight:bold;color:#23A3DD;">📁/@<span style="font-weight:bold;color:#23A3DD;"><i class="fab fa-git-alt fa-lg"><\/i>/g' \
+    sed "/<pre>/,/<\/pre>/ s/@<span style=\"font-weight:bold;color:#23A3DD;\">📁/@<span style=\"font-weight:bold;color:#23A3DD;\">$ROOT_ICON<\/i>/g" \
     > "$TMP_DIR/$FOLDER_NAME.html"
 
 # Convert to SVG and output to stdout

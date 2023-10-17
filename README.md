@@ -34,6 +34,8 @@ INTERACTIVE=true ./erd2svg.sh
 LINE_COLOR=white ./erd2svg.sh
 # Pass additional args to tree provider
 ADDITIONAL_ARGS='--no-git' ./erd2svg.sh
+# Change root icon (to git for example)
+ROOT_ICON='<i class="fab fa-git-alt fa-lg">'
 
 # Multiple params
 INTERACTIVE=true ADDITIONAL_ARGS='--no-git --dirs-only' ./erd2svg.sh
