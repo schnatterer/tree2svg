@@ -58,6 +58,7 @@ aha -f "$TMP_DIR/$FOLDER_NAME.tree" | \
     sed 's|󰗀|<i class="fas fa-code"></i>|g' |\
     sed 's|󰜡|<i class="fas fa-code"></i>|g' |\
     sed 's||<i class="fab fa-html5"></i>|g' |\
+    sed 's||<i class="fas fa-mountain"></i>|g' |\
     sed 's||<i class="fab fa-markdown" style="color:grey;"></i>|g' |\
     sed 's||🐋|g' |\
     sed 's||{}|g' |\
