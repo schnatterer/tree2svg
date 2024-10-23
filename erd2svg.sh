@@ -42,6 +42,9 @@ fi
 # Add Git icon for root of the tree
 # Ignore gitkeep files
 # TODO find an easier way to handle nerd fonts instead of replacing icons
+# Alternatives:
+# https://simpleicons.org/maps
+# https://tabler-icons.io/
 aha -f "$TMP_DIR/$FOLDER_NAME.tree" | \
     sed '/\.gitkeep/d' | \
     sed 's|color:blue|color:#23A3DD|g' | \
@@ -64,8 +67,9 @@ aha -f "$TMP_DIR/$FOLDER_NAME.tree" | \
     sed 's||{}|g' |\
     sed 's|span@style|span style|g' | \
     sed -e "s/<head>/<head><style type=\"text\/css\">body { color: $LINE_COLOR }<\/style>\n/g" | \
-    sed 's/<\/body>/<script src="https:\/\/unpkg.com\/twemoji@latest\/dist\/twemoji.min.js" crossorigin="anonymous"><\/script>\n<script>twemoji.parse(document.body, { folder: \x27svg\x27, ext: \x27.svg\x27 } )<\/script>\n<\/body>/g' | \
     sed 's/<head>/<head><style type="text\/css">img.emoji { height: 1em; width: 1em; margin: 0 .05em 0 .1em; vertical-align: -0.1em;}<\/style>\n/g' | \
+    sed 's/<head>/<head><script src="https:\/\/unpkg.com\/twemoji@14.0.2\/dist\/twemoji.min.js" crossorigin="anonymous"><\/script>\n/g' | \
+    sed 's/<\/body>/<script>twemoji.parse(document.body, { folder: \x27svg\x27, ext: \x27.svg\x27, base: \x27https:\/\/cdn.jsdelivr.net\/gh\/twitter\/twemoji@14.0.2\/assets\/\x27 } )<\/script>\n<\/body>/g' | \
     sed 's/<\/body>/<script src="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/5.15.4\/js\/all.min.js"><\/script>\n<\/body>/g' | \
     sed 's/<head>/<head><link rel="stylesheet" href="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/5.15.4\/css\/all.min.css"\/>\n/g' | \
     sed "/<pre>/,/<\/pre>/ s/@<span style=\"font-weight:bold;color:#23A3DD;\">📁/@<span style=\"font-weight:bold;color:#23A3DD;\">$ROOT_ICON<\/i>/g" \
