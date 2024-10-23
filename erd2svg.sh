@@ -6,6 +6,8 @@ LINE_COLOR="${LINE_COLOR:-'#777'}" # black or #777 in bright mode, white for dar
 ADDITIONAL_ARGS="${ADDITIONAL_ARGS:-}" 
 INTERACTIVE=${INTERACTIVE:-'false'}
 ROOT_ICON=${ROOT_ICON:-'📂'} # former default: '<i class="fab fa-git-alt fa-lg">'
+WIDTH=${WIDTH:-800}
+HEIGHT=${HEIGHT:-600}
 
 TMP_DIR=$(mktemp -d)
 deleteTmpDir() {
@@ -83,4 +85,8 @@ fi
 # Convert to SVG and output to stdout
 docker run --rm -v"$TMP_DIR":/in fathyb/html2svg:1.0.0 "file:///in/$FOLDER_NAME.html" |\
   sed '/<rect fill="white".*/d' |\
-  sed 's/@/\xC2\xA0/g'
+  sed 's/@/\xC2\xA0/g' |\
+  sed -e 's/width="1919"/width="'"$WIDTH"'"/' |\
+  sed -e 's/height="1080"/height="'"$HEIGHT"'"/'
+  
+ 
